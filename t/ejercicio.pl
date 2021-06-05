@@ -18,17 +18,17 @@ sub deDecABin{
     my$cantDigitos=length($nAConvetir);
     my$numeroAux=$nAConvetir;
     my @listaNConvertido=();
-    for my $index(0..$cantDigitos) {
-        if ($numeroAux / 2 - int($numeroAux) * 2 == 0) { ##encapsular comportamiento en una funcion
+   while($numeroAux>2){
+       $numeroAux=$numeroAux/2;
+        if ($numeroAux-int($numeroAux)>0) { ##encapsular comportamiento en una funcion
           push(@listaNConvertido,1)
         }
         else{
             push(@listaNConvertido,0)
         }
-        $numeroAux =int($numeroAux / 2);
+        $numeroAux =int($numeroAux);
     }
-
-
+    print(@listaNConvertido)
 }
 
 
@@ -56,10 +56,12 @@ sub pruebaIteraciones{
 
 }
 
-my $numero=123;
-my $pepe=deDecABin(2);
+my @numero=();
+push(@numero,2);
+push(@numero,3);
 
-print($pepe);
+deDecABin(1);
+
 
 
 
