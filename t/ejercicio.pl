@@ -14,7 +14,20 @@ sub deBinADec{
     return($numeroConvertido)
 }
 sub deDecABin{
-    my($)
+    my($nAConvetir)=shift @_;
+    my$cantDigitos=length($nAConvetir);
+    my$numeroAux=$nAConvetir;
+    my @listaNConvertido=();
+    for my $index(0..$cantDigitos) {
+        if ($numeroAux / 2 - int($numeroAux) * 2 == 0) { ##encapsular comportamiento en una funcion
+          push(@listaNConvertido,1)
+        }
+        else{
+            push(@listaNConvertido,0)
+        }
+        $numeroAux =int($numeroAux / 2);
+    }
+
 
 }
 
@@ -44,7 +57,8 @@ sub pruebaIteraciones{
 }
 
 my $numero=123;
-my $pepe=deBinADec(111);
+my $pepe=deDecABin(2);
+
 print($pepe);
 
 
