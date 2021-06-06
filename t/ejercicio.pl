@@ -108,13 +108,9 @@ sub convertirHexaABinario {
     return ($resultado);
 }
 sub convertirDecimalAHexa {
-    my ($numeroEnHexa) = shift @_;
-    my $numeroAuxiliar=$numeroEnHexa;
-    my $resultado = "";
-    for (1 .. length($numeroEnHexa)) {
-        $resultado=  equivalenciaDecimalAHexa(chop($numeroAuxiliar)).$resultado;
-    }
-    return ($resultado);
+    my ($numeroEnDecimal) = shift @_;
+    my $numeroAuxiliar=$numeroEnDecimal;
+    return convertirBinarioAHexa(int(convertirDecimalABinario($numeroAuxiliar)));
 }
 sub convertirBinarioAHexa{
     my ($numeroEnBinario) = shift @_;
@@ -186,7 +182,7 @@ sub convertir {
 
 
 
-print( convertirBinarioAHexa(11111111));
+print( convertirDecimalAHexa(11));
 
 
 
