@@ -116,30 +116,31 @@ sub baseDatosHexa{
                  13=>"D",
                  14=>"E",
                  15=>"F");
-    my$resultado=-1;
+    my $resultado=-1;
     if($base1==16 and $base2==2){
-     $resultado=%hexaABin->$numero;
+     $resultado=$hexaABin{$numero};
     }
     elsif($base1==16 and $base2==10){
-        $resultado=%hexaADec.$numero;
+        $resultado=$hexaADec{$numero};
     }
     elsif($base1==2 and $base2==16){
-        $resultado=%binAHexa.$numero;
+        $resultado=$binAHexa{$numero};
     }
     elsif($base1==10 and $base2==16){
-        $resultado=%decAHexa.$numero;
+        $resultado=$decAHexa{$numero};
     }
     return $resultado;
 }
 
-sub deHexaA() {
+sub deHexaA {
     my ($base) = shift @_;
     my ($numero) = shift @_;
     my @resultado = {};
     my $numeroAux = $numero;
     if ($base == 10) {
         for (0 .. length($numero)) {
-            push(@resultado, baseDatosHexa(16, chop $numeroAux, 10))
+            print(baseDatosHexa(16, chop $numeroAux, 10));
+            #push(@resultado, baseDatosHexa(16, chop $numeroAux, 10))
         }
         if ($base == 2) {
             for (0 .. length($numero)) {
@@ -151,10 +152,9 @@ sub deHexaA() {
 
 }
 
+my $resultado=deHexaA(10,2);
 
-my $num=10;
-my $result=baseDatosHexa(10,"B",16);
-print ($result);
+print ($resultado);
 
 
 
