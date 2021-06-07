@@ -1,4 +1,4 @@
-package api.pl;
+package api;
 use strict;
 use warnings FATAL => 'all';
 use REST::Client;
@@ -8,22 +8,11 @@ use JSON;
 use Data::Dumper;
 use MIME::Base64;
 
-
-if ($#ARGV ne 0) {
-    print "usage: $0 <username>\n";
-    exit 1;
-}
-my $reviewerToRemove = $ARGV[0];
-my $username = 'admin';
-my $password = 'admin';
-my $headers = {};
+print("ingrese una ciudad para averiguar su clima");
+my$ciudad = <STDIN>;#The basic use case
+print($ciudad);
 my $client = REST::Client->new();
-$client->setHost('http://api.openweathermap.org');
-$client->GET(
-    '/data/2.5/weather?q=London&appid=5ab37bfe20f2f2df03f9fe16af8d6e55',
-    $headers
-);
-my $response = from_json($client->responseContent());
-print($response);
+$client->GET("http://api.openweathermap.org/data/2.5/weather?q=$ciudad&appid=5ab37bfe20f2f2df03f9fe16af8d6e55");
+print $client->responseContent();
 
-1;
+
