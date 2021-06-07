@@ -56,26 +56,7 @@ sub equivalenciaHexaABinario {
         "F"           => "1111");
     return $hexaABinario{$numEnHexa};
 }
-sub equivalenciaDecimalAHexa {
-    my ($numEnHexa) = shift @_;
-    my %binarioHexa = (0=>"0",
-                       1=>"1",
-                       2=>"2",
-                       3=>"3",
-                       4=>"4",
-                       5=>"5",
-                       6=>"6",
-                       7=>"7",
-                       8=>"8",
-                       9=>"9",
-                       10=>"A",
-                       11=>"B",
-                       12=>"C",
-                       13=>"D",
-                       14=>"E",
-                       15=>"F");
-    return $binarioHexa{$numEnHexa};
-}
+
 sub equivalenciaBinarioAHexa {
     my ($numEnHexa) = shift @_;
     my %binarioHexa = (0000=>"0",
@@ -114,14 +95,15 @@ sub convertirDecimalAHexa {
 }
 sub convertirBinarioAHexa{
     my ($numeroEnBinario) = shift @_;
-    my $numeroAuxiliar=$numeroEnBinario;
     my $resultado = "";
-    my $agrupacion=agruparDe($numeroAuxiliar,4);
-    chopN($numeroAuxiliar,4);
-    for(1.. length($numeroEnBinario)/4){
-        $resultado=equivalenciaBinarioAHexa($agrupacion).$resultado;
+    my $numeroAuxiliar=$numeroEnBinario;
+    my $agrupacion=0;
+
+    for(1.. (length($numeroEnBinario)/4)){
         $agrupacion=agruparDe($numeroAuxiliar,4);
-        chopN($numeroAuxiliar,4);
+        $resultado=  equivalenciaBinarioAHexa($agrupacion).$resultado;
+        $numeroAuxiliar=chopN($numeroAuxiliar,4);
+
     }
     return $resultado;
 
@@ -131,10 +113,12 @@ sub agruparDe{
     my ($cantAgrupacion)=shift @_;
     my $numeroAux = $numero;
     my $agrupacion='';
+    my $chopAux=0;
     for(1..$cantAgrupacion){
-        $agrupacion=chop($numeroAux) . $agrupacion;
+        $chopAux=chop($numeroAux);
+        $agrupacion= $chopAux. $agrupacion;
     }
-    return(int($agrupacion));
+    return($agrupacion);
 }
 sub chopN{
     my($numero)=shift @_;
@@ -147,7 +131,8 @@ sub chopN{
 }
 sub convertirHexaADecimal{
     my ($numeroEnHexa) = shift @_;
-    return convertirHexaABinario(int(convertirBinarioADecimal($numeroEnHexa)));
+
+    return convertirBinarioADecimal(convertirHexaABinario($numeroEnHexa));
 }
 
 
@@ -181,11 +166,16 @@ sub convertir {
 
 
 
-
-print( convertirDecimalAHexa(11));
-
-
-
+#print("binario a hexa");
+#print(convertirBinarioAHexa(101010101111));
+#print("binario a Decimal");
+#print(convertirBinarioADecimal(101010101111));
+#print("hexa a Binario");
+#print(convertirHexaABinario("ABCD"));
+#print("hexa a Decimal");
+print(convertirHexaADecimal("ABCD"));
+#print("Decimal a Binario");
+#print(convertirDecimalABinario(32));
 
 
 
