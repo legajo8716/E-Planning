@@ -14,5 +14,7 @@ print($ciudad);
 my $client = REST::Client->new();
 $client->GET("http://api.openweathermap.org/data/2.5/weather?q=$ciudad&appid=5ab37bfe20f2f2df03f9fe16af8d6e55");
 print $client->responseContent();
+%respuesta=$client->responseContent();
+print(%respuesta{$weather})
 
 
