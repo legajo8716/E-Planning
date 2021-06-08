@@ -77,10 +77,12 @@ sub encriptar{
     my($textoSubido)=shift@_;
     my $textoEncriptado='';
     if(estaEncriptado($textoSubido)){
-       print("No se puede encriptar un texto ya encriptado")
+       print("No se puede encriptar un texto ya encriptado");
+        $textoEncriptado=$textoSubido;
     }
     else{
         $textoEncriptado=convertirTexto($textoSubido).$textoEncriptado;
+        print("Texto encriptado");
     }
     return $textoEncriptado;
 }
@@ -90,6 +92,8 @@ sub desencriptar {
     if (estaEncriptado($textoSubido)) {
         chop($textoSubido);
         $textoDesencriptado = convertirTexto($textoSubido);
+        print("Texto desencriptado");
+
     }
     else {
         print("No se puede Desencriptar un texto ya Desencriptado");
@@ -116,6 +120,7 @@ sub leerTexto{
       close($documento);
       if($encriptar){
           $textoACifrar=encriptar($textoACifrar)
+
       }
      else{
           $textoACifrar=desencriptar($textoACifrar)
@@ -124,16 +129,21 @@ sub leerTexto{
       print $textoParaActualizar $textoACifrar;
       close($textoParaActualizar);
   }
-# open(my $archivo,'>',"pepe.txt");
-# my $contenido=<STDIN>;
-# print $archivo $contenido;
-# close( $archivo);
 
 
 
 
-
-encriptarODesencriptar("pepe.txt",0);
+print("Usted podra notar en su documento si esta encriptado o sin encriptar. Solo debe
+observar la finalizacion de su texto, si este contiene un simbolo raro similar a este  es porque su texto
+esta encriptado, utilice el desencriptador para desencriptar su documentacion valiosa. En el caso que desee encriptar,
+podra utilizar el encriptador para resguardar su informacion. En el menu de opciones le indicara los pasos a seguir para utilizar
+este script.\n");
+print("seleccione nombre de la ruta a encriptar\n");
+my $ruta=<STDIN>;
+print("\nIngrese 1 si quiere encriptar o 0 si quiere desencriptar \n");
+my $quiereEncriptar=<STDIN>;
+print("\n");
+encriptarODesencriptar($ruta,int($quiereEncriptar));
 
 
 
