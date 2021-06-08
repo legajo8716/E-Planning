@@ -2,17 +2,6 @@ use strict;
 use warnings FATAL => 'all';
 
 
-# open(my $archivo,'>',"pepe.txt");
-# my $contenido=<STDIN>;
-# print $archivo $contenido;
-# close( $archivo);
-my $texto= "Hola como estas";
-my $textoEncriptado="";
-my $letraAEncriptar="";
-# print(ord(4));
-# print(chr(52));
-#     print(length($texto));
-
 
 sub convertir{
     my ($letra)=shift@_;
@@ -81,6 +70,7 @@ sub estaEncriptado{
     my($texto)=shift@_;
     my($textoAux)=$texto;
 
+
     return(ord(chop($textoAux))==27  )
 }
 sub encriptar{
@@ -94,46 +84,46 @@ sub encriptar{
     }
     return $textoEncriptado;
 }
-sub desencriptar{
-    my($textoSubido)=shift@_;
-    my $textoDesencriptado='';
-    if(estaEncriptado($textoSubido)){
-        $textoEncriptado=convertirTexto(chopN($textoSubido,3));
+sub desencriptar {
+    my ($textoSubido) = shift @_;
+    my $textoDesencriptado = '';
+    if (estaEncriptado($textoSubido)) {
+        chop($textoSubido);
+        $textoDesencriptado = convertirTexto($textoSubido);
     }
-    else{
-        print("No se puede Desencriptar un texto ya Desencriptado")
-
+    else {
+        print("No se puede Desencriptar un texto ya Desencriptado");
+        $textoDesencriptado = $textoSubido;
     }
-    return $textoEncriptado;
+    return $textoDesencriptado;
 
 }
 sub leerTexto{
-    <texto>=shift @_;
-    my $textoAux='';
-    while(<texto>){
-        $textoAux= $_.$textoAux
+    my($documento)=shift@_;
+    my $resultado='';
+    while ( $resultado = <$documento>) {
+        chomp $resultado;
+        print($resultado);
     }
-return $textoAux;
 
+    return $resultado
 }
-sub encriptarODesencriptar{
-    my($urlTexto)=shift@_;
-    my($encriptar)=shift@_;
-    open( <textoACifrar>,'<',"pepe.txt");
-    my$textoAux=leerTexto(<textoACifrar>);
-    close(<textoACifrar>);
-    my $textoProcesado='';
-
-    if($encriptar){
-        $textoAux=encriptar($textoACifrar)
-    }
-    else{
-        $textoAux=desencriptar($textoACifrar)
-    }
-    open( my$textoParaActualizar,'>',"pepe.txt");
-    print $textoParaActualizar $textoAux;
-    close($textoParaActualizar);
-}
+  sub encriptarODesencriptar{
+     my($urlTexto)=shift@_;
+      my($encriptar)=shift@_;
+      open( my $documento,'<',"pepe.txt");
+      my $textoACifrar=<$documento>;
+      close($documento);
+      if($encriptar){
+          $textoACifrar=encriptar($textoACifrar)
+      }
+     else{
+          $textoACifrar=desencriptar($textoACifrar)
+      }
+      open( my$textoParaActualizar,'>',"pepe.txt");
+      print $textoParaActualizar $textoACifrar;
+      close($textoParaActualizar);
+  }
 # open(my $archivo,'>',"pepe.txt");
 # my $contenido=<STDIN>;
 # print $archivo $contenido;
@@ -141,12 +131,9 @@ sub encriptarODesencriptar{
 
 
 
-open( my $textoParaActualizar,'<',"pepe.txt");
-my$aux=$textoParaActualizar;
 
-print($textoParaActualizar);
 
-close($textoParaActualizar);
+encriptarODesencriptar("pepe.txt",0);
 
 
 
