@@ -51,10 +51,10 @@ sub convertirLetra{
 
 
 sub convertirTexto {
-    my($textito)="aryfba gonzalez";
+    my($texto)=shift@_;
     my $cadenaProcesada = "";
-    for (1 .. length($textito)) {
-        my $letraAEncriptar = chop($textito);
+    for (1 .. length($texto)) {
+        my $letraAEncriptar = chop($texto);
 
         if (esMayuscula($letraAEncriptar) or esMinuscula($letraAEncriptar)) {
             $cadenaProcesada = convertirLetra($letraAEncriptar) . $cadenaProcesada;
@@ -107,13 +107,21 @@ sub desencriptar{
     return $textoEncriptado;
 
 }
+sub leerTexto{
+    <texto>=shift @_;
+    my $textoAux='';
+    while(<texto>){
+        $textoAux= $_.$textoAux
+    }
+return $textoAux;
 
+}
 sub encriptarODesencriptar{
     my($urlTexto)=shift@_;
     my($encriptar)=shift@_;
-    open(my $textoACifrar,'<',"pepe.txt");
-    my$textoAux=$textoACifrar;
-    close($textoACifrar);
+    open( <textoACifrar>,'<',"pepe.txt");
+    my$textoAux=leerTexto(<textoACifrar>);
+    close(<textoACifrar>);
     my $textoProcesado='';
 
     if($encriptar){
@@ -122,15 +130,25 @@ sub encriptarODesencriptar{
     else{
         $textoAux=desencriptar($textoACifrar)
     }
-    open( $textoACifrar,'>',"pepe.txt");
-    print $textoACifrar $textoAux;
-    close($textoACifrar);
+    open( my$textoParaActualizar,'>',"pepe.txt");
+    print $textoParaActualizar $textoAux;
+    close($textoParaActualizar);
 }
+# open(my $archivo,'>',"pepe.txt");
+# my $contenido=<STDIN>;
+# print $archivo $contenido;
+# close( $archivo);
 
 
 
+open( my $textoParaActualizar,'<',"pepe.txt");
+my$aux=$textoParaActualizar;
 
-print(encriptarODesencriptar("pepe.txt",1));
+print($textoParaActualizar);
+
+close($textoParaActualizar);
+
+
 
 
 
