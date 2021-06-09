@@ -111,11 +111,9 @@ sub convertirBinarioAHexa{
     for(1.. (length($numeroEnBinario)/4)){
         $agrupacion=agruparDe($numeroAuxiliar,4);
         $resultado=  equivalenciaBinarioAHexa($agrupacion).$resultado;
-        $numeroAuxiliar=chopN($numeroAuxiliar,4);
-
+        $numeroAuxiliar=eliminarLosUltimosN($numeroAuxiliar,4);
     }
     return $resultado;
-
 }
 sub agruparDe{
     my ($numero) = shift @_;
@@ -129,7 +127,7 @@ sub agruparDe{
     }
     return($agrupacion);
 }
-sub chopN{
+sub eliminarLosUltimosN{
     my($numero)=shift @_;
     my($n)=shift @_;
     my$numAux=$numero;
@@ -140,7 +138,6 @@ sub chopN{
 }
 sub convertirHexaADecimal{
     my ($numeroEnHexa) = shift @_;
-
     return convertirBinarioADecimal(convertirHexaABinario($numeroEnHexa));
 }
 
