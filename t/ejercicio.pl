@@ -2,37 +2,46 @@ package ejercicio;
 use strict;
 use warnings FATAL => 'all';
 
+
 sub convertirBinarioADecimal{
     my($nAConvetir)=shift @_;
     my$numeroAux=$nAConvetir;
     my$cantDigitos=length($nAConvetir);
     my$numeroConvertido=0;
+    my $exponenteAux=0;
     for my $index(0..$cantDigitos-1){
-       my $exp=2**$index;
-      $numeroConvertido=$numeroConvertido+(chop($numeroAux)*$exp);
+        $exponenteAux=2**$index;
+      $numeroConvertido=$numeroConvertido+(chop($numeroAux)*$exponenteAux);
     }
     return("$numeroConvertido")
 }
-sub convertirDecimalABinario{
-    my($nAConvetir)=shift @_;
-    my$cantDigitos=length($nAConvetir);
-    my$numeroAux=$nAConvetir;
-    my @listaNConvertido=();
-   while($numeroAux>=2){
-       $numeroAux=$numeroAux/2;
-        if ($numeroAux-int($numeroAux)>0) { ##encapsular comportamiento en una funcion
-          push(@listaNConvertido,1)
-        }
-        else{
-            push(@listaNConvertido,0)
-        }
-        $numeroAux =int($numeroAux);
-    }
-    if($numeroAux<1){push(@listaNConvertido,0)}
+sub esUnDecimalEntero{
+    my($numEnDecimal)=shift @_;
+    return ($numEnDecimal-int($numEnDecimal)>0);
+}
+sub restoDeUnaDivision{
+    my($dividendo)=shift @_;
+    my($divisor)=shift @_;
+    my$resultado=$dividendo/$divisor;
 
-    else{push(@listaNConvertido,1)
+    my $resto=$dividendo-int($divisor*int($resultado));
+    return ($resto);
+
+}
+sub convertirDecimalABinario{
+    my($numEnBinario)=shift @_;
+    my$cantDigitos=length($numEnBinario);
+    my$numAConvertir=$numEnBinario;
+    my @listaNumConvertido=();
+    my $ultimoTerminoProcesado=0;
+   while($numAConvertir>=2){
+       push(@listaNumConvertido,restoDeUnaDivision($numAConvertir,2));
+       $ultimoTerminoProcesado=$numAConvertir;
+       $numAConvertir=$numAConvertir/2;
+       $numAConvertir =int($numAConvertir);
     }
-    return(reverse(@listaNConvertido))
+    push(@listaNumConvertido,$ultimoTerminoProcesado/2);
+    return(reverse(@listaNumConvertido))
 }
 
 
@@ -173,10 +182,10 @@ sub convertir {
 #print("hexa a Binario");
 #print(convertirHexaABinario("ABCD"));
 #print("hexa a Decimal");
-print(convertirHexaADecimal("ABCD"));
+#print(convertirHexaADecimal("ABCD"));
 #print("Decimal a Binario");
 #print(convertirDecimalABinario(32));
-
+print(convertirDecimalABinario(32));
 
 
 
