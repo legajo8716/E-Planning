@@ -98,11 +98,8 @@ sub cantDeDigitosMult4{
     my ($numero) = shift @_;
     my $num=$numero;
     my $cantDeCeros=4-(length($num)/4- int(length($num)/4))*4;
-    my $ceros='';
-    for(1..$cantDeCeros){
-        $ceros=$ceros.'0';
-    }
-    return ($ceros.$num);
+    my$resultado=sprintf("%0$cantDeCeros"."d",$numero);
+    return $resultado ;
 }
 sub convertirDecimalAHexa {
     my ($numeroEnDecimal) = shift @_;
@@ -174,9 +171,9 @@ sub convertir {
     return $conversionRealizada;
 }
 
+my$valor=sprintf("%04d",12);
 
-
-print(convertirDecimalAHexa(111213));
+print(cantDeDigitosMult4(11112));
 
 
 
