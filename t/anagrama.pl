@@ -20,9 +20,6 @@ sub aparicionesDeLetra{
     return $cantApariciones;
 
 }
-
-
-
 sub mismaCantLetras{
     my($cadena1)=shift@_;
     my($cadena2)=shift@_;
@@ -33,7 +30,6 @@ sub mismasAparicionesDeLetra{
     my($cadena2)=shift@_;
     my($letra)=shift@_;
     return aparicionesDeLetra($cadena1,$letra)==aparicionesDeLetra($cadena2,$letra);
-
 }
 
 sub esAnagrama{
@@ -43,7 +39,6 @@ sub esAnagrama{
     my $letraATestear='';
     my $resultado=1;
     if(mismaCantLetras($cadena1,$cadena2)){
-
         while(length($cadenaAux)>0 && $resultado==1){
             $letraATestear=chop($cadenaAux);
             $resultado= mismasAparicionesDeLetra($cadena1,$cadena2,$letraATestear);

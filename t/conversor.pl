@@ -11,36 +11,35 @@ sub convertirBinarioADecimal{
     my $exponenteAux=0;
     for my $index(0..$cantDigitos-1){
         $exponenteAux=2**$index;
-      $numeroConvertido=$numeroConvertido+(chop($numeroAux)*$exponenteAux);
+        $numeroConvertido=$numeroConvertido+(chop($numeroAux)*$exponenteAux);
     }
     return("$numeroConvertido")
 }
+
 sub esUnDecimalEntero{
     my($numEnDecimal)=shift @_;
     return ($numEnDecimal-int($numEnDecimal)>0);
 }
+
 sub restoDeUnaDivision{
     my($dividendo)=shift @_;
     my($divisor)=shift @_;
     my$resultado=$dividendo/$divisor;
-
     my $resto=$dividendo-int($divisor*int($resultado));
     return ($resto);
-
 }
 sub convertirDecimalABinario{
     my($numEnBinario)=shift @_;
-    my$cantDigitos=length($numEnBinario);
     my$numAConvertir=$numEnBinario;
     my @listaNumConvertido=();
     my $ultimoTerminoProcesado=0;
-   while($numAConvertir>=2){
-       push(@listaNumConvertido,restoDeUnaDivision($numAConvertir,2));
-       $ultimoTerminoProcesado=$numAConvertir;
-       $numAConvertir=$numAConvertir/2;
-       $numAConvertir =int($numAConvertir);
+    while($numAConvertir>=2){
+        push(@listaNumConvertido,restoDeUnaDivision($numAConvertir,2));
+        $ultimoTerminoProcesado=$numAConvertir;
+        $numAConvertir=$numAConvertir/2;
+        $numAConvertir =int($numAConvertir);
     }
-    push(@listaNumConvertido,$ultimoTerminoProcesado/2);
+    push(@listaNumConvertido,int($ultimoTerminoProcesado/2));
     return(reverse(@listaNumConvertido))
 }
 
@@ -86,8 +85,6 @@ sub equivalenciaBinarioAHexa {
         1111=>"F");
     return $binarioHexa{$numEnHexa};
 }
-
-
 sub convertirHexaABinario {
     my ($numeroEnHexa) = shift @_;
     my $numeroAuxiliar=$numeroEnHexa;
@@ -97,17 +94,27 @@ sub convertirHexaABinario {
     }
     return ($resultado);
 }
+sub cantDeDigitosMult4{
+    my ($numero) = shift @_;
+    my $num=$numero;
+    my $cantDeCeros=4-(length($num)/4- int(length($num)/4))*4;
+    my $ceros='';
+    for(1..$cantDeCeros){
+        $ceros=$ceros.'0';
+    }
+    return ($ceros.$num);
+}
 sub convertirDecimalAHexa {
     my ($numeroEnDecimal) = shift @_;
     my $numeroAuxiliar=$numeroEnDecimal;
-    return convertirBinarioAHexa(int(convertirDecimalABinario($numeroAuxiliar)));
+    my $numeroEnBinario=convertirDecimalABinario($numeroAuxiliar);
+    return convertirBinarioAHexa(cantDeDigitosMult4($numeroEnBinario));
 }
 sub convertirBinarioAHexa{
     my ($numeroEnBinario) = shift @_;
     my $resultado = "";
     my $numeroAuxiliar=$numeroEnBinario;
     my $agrupacion=0;
-
     for(1.. (length($numeroEnBinario)/4)){
         $agrupacion=agruparDe($numeroAuxiliar,4);
         $resultado=  equivalenciaBinarioAHexa($agrupacion).$resultado;
@@ -140,49 +147,42 @@ sub convertirHexaADecimal{
     my ($numeroEnHexa) = shift @_;
     return convertirBinarioADecimal(convertirHexaABinario($numeroEnHexa));
 }
-
-
 sub convertir {
     my $base1=shift @_;
     my $numero=shift @_;
     my $base2=shift @_;
-    if($base1==2and$base2=10){
-        convertirBinarioADecimal($numero)#ok
+    my $conversionRealizada=shift@_;
+    if($base1==2and$base2==10){
+        $conversionRealizada= convertirBinarioADecimal($numero)#ok
     }
-    if($base1==2and$base2=16){
-        convertirBinarioAHexa($numero)#ok
+    elsif($base1==2and$base2==16){
+        $conversionRealizada=convertirBinarioAHexa($numero)#ok
     }
-    if($base1==16and$base2=10){
-        convertirHexaADecimal($numero)
+    elsif($base1==16and$base2==10){
+        $conversionRealizada=convertirHexaADecimal($numero)
     }
-    if($base1==16and$base2=2){
-        convertirHexaABinario($numero)#ok
+    elsif($base1==16and$base2==2){
+        $conversionRealizada=convertirHexaABinario($numero)#ok
     }
-    if($base1==10and$base2=2){
-        convertirDecimalABinario($numero)#ok
+    elsif($base1==10and$base2==2){
+        $conversionRealizada=convertirDecimalABinario($numero)#ok
     }
-    if($base1==10and$base2=16){
-        convertirDecimalAHexa($numero)
+    elsif($base1==10and$base2==16){
+        $conversionRealizada=convertirDecimalAHexa($numero)
     }
 
-
+    return $conversionRealizada;
 }
 
 
 
+print(convertirDecimalAHexa(111213));
 
 
-#print("binario a hexa");
-#print(convertirBinarioAHexa(101010101111));
-#print("binario a Decimal");
-#print(convertirBinarioADecimal(101010101111));
-#print("hexa a Binario");
-#print(convertirHexaABinario("ABCD"));
-#print("hexa a Decimal");
-#print(convertirHexaADecimal("ABCD"));
-#print("Decimal a Binario");
-#print(convertirDecimalABinario(32));
-print(convertirDecimalABinario(32));
+
+
+
+
 
 
 
