@@ -98,7 +98,8 @@ sub cantDeDigitosMult4{
     my ($numero) = shift @_;
     my $num=$numero;
     my $cantDeCeros=4-(length($num)/4- int(length($num)/4))*4;
-    my$resultado=sprintf("%0$cantDeCeros"."d",$numero);
+    my$resultado="";
+    for()
     return $resultado ;
 }
 sub convertirDecimalAHexa {
@@ -110,9 +111,9 @@ sub convertirDecimalAHexa {
 sub convertirBinarioAHexa{
     my ($numeroEnBinario) = shift @_;
     my $resultado = "";
-    my $numeroAuxiliar=$numeroEnBinario;
+    my $numeroAuxiliar=cantDeDigitosMult4($numeroEnBinario);
     my $agrupacion=0;
-    for(1.. (length($numeroEnBinario)/4)){
+    for(1.. (length($numeroAuxiliar)/4)){
         $agrupacion=agruparDe($numeroAuxiliar,4);
         $resultado=  equivalenciaBinarioAHexa($agrupacion).$resultado;
         $numeroAuxiliar=eliminarLosUltimosN($numeroAuxiliar,4);
@@ -173,7 +174,7 @@ sub convertir {
 
 my$valor=sprintf("%04d",12);
 
-print(cantDeDigitosMult4(11112));
+print(convertirBinarioAHexa(1111));
 
 
 
