@@ -86,8 +86,6 @@ sub capturarPrimeraCuenta {
     }
 }
 
-
-
 sub efectuarOperacion {
     my ($cuentaEnNotPol) = shift @_;
     my ($cuentaParaProcesar) = $cuentaEnNotPol;

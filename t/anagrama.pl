@@ -44,14 +44,14 @@ sub esAnagrama{
             $resultado= mismasAparicionesDeLetra($cadena1,$cadena2,$letraATestear);
         }
         if($resultado==1){
-            print("Son anagrama")
+            print("Son anagrama");
         }
         else{
-            print("No son anagrama")
+            print("No son anagrama");
         }
     }
     else{
-        print("No son anagrama")
+        print("No son anagrama");
     }
 
 
