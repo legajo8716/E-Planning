@@ -65,3 +65,28 @@ $> 51
 Ejercicio 6:
 ¿Qué deberías testear si tuvieras que escribir los test de unidad del Ejercicio 2? (No hace falta escribir el test,
 solo describir los casos a testear)
+
+Ejercicios de Base de Datos:
+Premisa:
+
+● Se cuenta con una empresa que se dedica tanto a vender productos como a proveer servicios, estos
+productos y servicios tienen precios asociados.
+
+● La empresa tiene una cartera de clientes, quienes pueden comprar sus productos o contratar sus
+servicios.
+
+● Para registrar estas transacciones, la empresa emite las facturas correspondientes, las cuales pueden
+incluir en su detalle todos los productos y servicios que se deseen.
+
+● En función de las facturas emitidas por la empresa, cada uno de los clientes va realizando los pagos
+correspondientes, teniendo la posibilidad de pagar en un mismo momento más de una factura (siempre
+se paga la totalidad de las mismas).
+
+Ejercicio 7:
+Definir un modelo de datos normalizado que soporte el negocio previamente definido.
+
+Ejercicio 8:
+Realizar una consulta SQL que permita determinar el saldo de un cliente específico a la fecha de hoy.
+
+Ejercicio 9:
+Realizar una consulta SQL que retorne todos los clientes deudores a la fecha de hoy
