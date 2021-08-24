@@ -15,6 +15,7 @@ resuelvan el problema.
 Ejercicio 1:
 Escribir una función que tome dos cadenas de caracteres y retorne verdadero en caso de que estas sean
 anagramas.
+
 Ejercicio 2:
 Escribir una función que tome como parámetros:
 1. Un número entero entre 2 y 25.
@@ -26,6 +27,7 @@ Ejemplos:
 convertir(2,“101”, 10) => 5,
 convertir(16,”a2”,2) => 10100010,
 convertir(10,”10”,16) => ”a”,
+
 Ejercicio 3:
 Implementar un script en Perl que tome como entrada una ciudad e imprima por pantalla el estado del clima en
 estos momentos.
